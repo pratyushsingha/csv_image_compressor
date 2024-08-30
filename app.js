@@ -15,9 +15,11 @@ app.use(express.urlencoded({ extended: true, limit: "16kb" }));
 app.use(express.static("public"));
 app.use(cookieParser());
 
+import { swaggerSpec, swaggerUi } from "./docs/swagger.js";
 import healthcheckRouter from "./src/routes/healthcheck.routes.js";
 import productRouter from "./src/routes/product.routes.js";
 
+app.use("/api/v1/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.use("/api/v1/healthcheck", healthcheckRouter);
 app.use("/api/v1/products", productRouter);
 
