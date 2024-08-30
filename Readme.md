@@ -40,3 +40,6 @@ A system to efficiently process image data from CSV files
 
 [Postman Collection](https://documenter.getpostman.com/view/25760346/2sAXjKbYPh)
 
+## Swagger Docs
+
+[csv_image_compressor Docs](https://img-compressor-backend.pratyushsinga.me/api/v1/docs/)
