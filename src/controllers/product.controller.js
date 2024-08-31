@@ -7,7 +7,6 @@ import { ApiResponse } from "../utils/ApiResponse.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { cloudinaryUpload } from "../utils/cloudinary.js";
 import { Product } from "../../models/product.model.js";
-import { ApiError } from "../utils/ApiError.js";
 
 const csvProductsUpload = asyncHandler(async (req, res) => {
   const csvFile = req.file.path;
@@ -58,7 +57,9 @@ const csvProductsUpload = asyncHandler(async (req, res) => {
         );
       } catch (error) {
         console.error("Error processing CSV:", error);
-        throw new ApiError(500, "Error processing CSV");
+        return res
+          .status(500)
+          .json(new ApiResponse(500, "Error processing CSV"));
       }
     });
 });
@@ -79,7 +80,9 @@ const processImagesInBackground = async (products) => {
     }
   } catch (error) {
     console.error("Error in background image processing:", error);
-    throw new ApiError(500, "Error in background image processing");
+    return res
+      .status(500)
+      .json(new ApiResponse(500, "Error in background image processing"));
   }
 };
 
